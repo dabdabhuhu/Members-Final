@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Profiles Dashboard</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f6f6f6;
+    }
+
+    .container {
+        display: flex;
+        height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 260px;
+        background: #2c3e50;
+        color: white;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
+    .sidebar h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .menu-title {
+        margin-top: 30px;
+        font-size: 14px;
+        opacity: 0.7;
+        text-transform: uppercase;
+    }
+
+    .profile-block {
+        margin: 12px 0;
+        cursor: pointer;
+    }
+
+    .profile-name {
+        font-size: 15px;
+    }
+
+    .profile-role {
+        font-size: 12px;
+        opacity: 0.8;
+        margin-left: 10px;
+    }
+
+    .profile-block:hover .profile-name {
+        color: #1abc9c;
+    }
+
+    .menu-item {
+        margin: 10px 0;
+        cursor: pointer;
+    }
+    .menu-item:hover {
+        text-decoration: underline;
+    }
+
+    /* Content Page */
+    .content {
+        flex: 1;
+        background: #ffffff;
+        padding: 30px;
+    }
+
+    .description-box {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        height: 150px;
+        background: #fafafa;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h1>Title / Logo</h1>
+
+        <div class="menu-title">Dashboard</div>
+
+        <div class="menu-item">Item 1</div>
+        <div class="menu-item">Item 2</div>
+        <div class="menu-item">Item 3</div>
+        <div class="menu-item">Item 4</div>
+
+        <div class="menu-title">Profiles</div>
+
+        <!-- Profiles with roles shown under names -->
+        <div class="profile-block" onclick="showProfile('gallega')">
+            <div class="profile-name">Gallega, John David B.</div>
+            <div class="profile-role">Frontend Developer</div>
+        </div>
+
+        <div class="profile-block" onclick="showProfile('villamor')">
+            <div class="profile-name">Villamor, Marc Danielle</div>
+            <div class="profile-role">Backend Developer</div>
+        </div>
+
+        <div class="profile-block" onclick="showProfile('areg')">
+            <div class="profile-name">Areglado, Meric Kent N.</div>
+            <div class="profile-role">UI/UX Designer</div>
+        </div>
+
+        <div class="profile-block" onclick="showProfile('lagas')">
+            <div class="profile-name">Lagas, Anroyd</div>
+            <div class="profile-role">IT Specialist</div>
+        </div>
+
+    </div>
+
+    <!-- Content Page -->
+    <div class="content">
+        <h2>Content Page</h2>
+        <div id="content-box">
+            <p>Select a profile from the sidebar.</p>
+        </div>
+
+        <div class="description-box">
+            <!-- Description stays blank as requested -->
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const profiles = {
+        gallega: {
+            name: "Gallega, John David B.",
+            age: 21,
+            role: "Frontend Developer",
+            skills: "HTML, CSS, JavaScript, React"
+        },
+        villamor: {
+            name: "Villamor, Marc Danielle",
+            age: 22,
+            role: "Backend Developer",
+            skills: "Node.js, PHP, MySQL"
+        },
+        areg: {
+            name: "Areglado, Meric Kent N.",
+            age: 21,
+            role: "UI/UX Designer",
+            skills: "Figma, Adobe XD, Wireframing"
+        },
+        lagas: {
+            name: "Lagas, Anroyd",
+            age: 23,
+            role: "IT Specialist",
+            skills: "Networking, Troubleshooting, System Admin"
+        }
+    };
+
+    function showProfile(key) {
+        const p = profiles[key];
+        document.getElementById("content-box").innerHTML = `
+            <p><strong>Name:</strong> ${p.name}</p>
+            <p><strong>Age:</strong> ${p.age}</p>
+            <p><strong>Role:</strong> ${p.role}</p>
+            <p><strong>Skills:</strong> ${p.skills}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
