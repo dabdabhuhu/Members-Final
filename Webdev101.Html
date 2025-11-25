@@ -1,15 +1,27 @@
+<!-- Revised HTML/CSS based on the provided dashboard UI -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Member Profiles Dashboard</title>
+<title>Team Dashboard</title>
 
 <style>
+    :root {
+        --bg-dark: #073b3a;
+        --bg-light: #ffffff;
+        --bg-card: #f0fdf4;
+        --accent: #10b981;
+        --accent-light: #6ee7b7;
+        --text-dark: #064e3b;
+        --text-light: #ecfdf5;
+    }
+
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f6f6f6;
+        font-family: "Inter", sans-serif;
+        background: var(--bg-light);
+        color: var(--text-dark);
     }
 
     .container {
@@ -20,86 +32,150 @@
     /* Sidebar */
     .sidebar {
         width: 260px;
-        background: #2c3e50;
-        color: white;
-        padding: 20px;
+        background: var(--bg-dark);
+        color: var(--text-light);
+        padding: 25px;
         box-sizing: border-box;
         overflow-y: auto;
     }
+
     .sidebar h1 {
-        font-size: 22px;
-        margin-bottom: 20px;
+        font-size: 20px;
+        margin-bottom: 25px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     .menu-title {
         margin-top: 30px;
-        font-size: 14px;
-        opacity: 0.7;
+        font-size: 13px;
+        opacity: 0.6;
         text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
     .profile-block {
+        background: rgba(255,255,255,0.05);
+        padding: 10px 12px;
+        border-radius: 10px;
         margin: 12px 0;
         cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .profile-block:hover {
+        background: rgba(255,255,255,0.12);
     }
 
     .profile-name {
         font-size: 15px;
+        font-weight: 500;
     }
 
     .profile-role {
         font-size: 12px;
-        opacity: 0.8;
-        margin-left: 10px;
+        opacity: 0.7;
     }
 
-    .profile-block:hover .profile-name {
-        color: #1abc9c;
-    }
-
-    .menu-item {
-        margin: 10px 0;
-        cursor: pointer;
-    }
-    .menu-item:hover {
-        text-decoration: underline;
-    }
-
-    /* Content Page */
+    /* Content */
     .content {
         flex: 1;
-        background: #ffffff;
-        padding: 30px;
+        background: #f1f5f9;
+        padding: 35px;
+        overflow-y: auto;
     }
 
-    .description-box {
+    .card {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
         margin-top: 20px;
+    }
+
+    .stat-box {
+        background: white;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--accent);
+    }
+
+    .active-roster {
+        margin-top: 30px;
+    }
+
+    .roster-item {
+        background: var(--bg-card);
         padding: 15px;
-        border: 1px solid #ddd;
-        height: 150px;
-        background: #fafafa;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        gap: 12px;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    }
+
+    .avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--accent-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .recent {
+        background: var(--bg-dark);
+        color: var(--text-light);
+        padding: 20px;
+        border-radius: 16px;
+        width: 320px;
+        margin-left: 20px;
+        height: fit-content;
+    }
+
+    .recent-item {
+        margin: 15px 0;
+        font-size: 14px;
+        opacity: 0.9;
     }
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <h1>Title / Logo</h1>
+        <h1>Team Leisure</h1>
+
+        <div class="menu-title">Main Menu</div>
+        <div class="menu-item" onclick="showDashboard()" style="padding:10px 12px; background:rgba(255,255,255,0.05); border-radius:10px; margin-bottom:15px; cursor:pointer;">
+            Team Dashboard
+        </div>
+        <h1>Team Leisure</h1>
 
         <div class="menu-title">Dashboard</div>
 
-        <div class="menu-item">Item 1</div>
-        <div class="menu-item">Item 2</div>
-        <div class="menu-item">Item 3</div>
-        <div class="menu-item">Item 4</div>
-
-        <div class="menu-title">Profiles</div>
-
-        <!-- Profiles with roles shown under names -->
         <div class="profile-block" onclick="showProfile('gallega')">
             <div class="profile-name">Gallega, John David B.</div>
             <div class="profile-role">Frontend Developer</div>
@@ -119,61 +195,160 @@
             <div class="profile-name">Lagas, Anroyd</div>
             <div class="profile-role">IT Specialist</div>
         </div>
-
     </div>
 
-    <!-- Content Page -->
+    <!-- Content -->
     <div class="content">
-        <h2>Content Page</h2>
-        <div id="content-box">
-            <p>Select a profile from the sidebar.</p>
+        <h2>Team Dashboard</h2>
+        <p>Overview of the team's performance and roster.</p>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">5</div>
+                <div>Team Members</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">27</div>
+                <div>Total Skills</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">80%</div>
+                <div>Avg. Proficiency</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">3</div>
+                <div>Active Projects</div>
+            </div>
         </div>
 
-        <div class="description-box">
-            <!-- Description stays blank as requested -->
+        <!-- Active Roster -->
+        <div class="active-roster">
+            <h3>Active Roster</h3>
+            <div class="roster-item"><div class="avatar">JD</div><div><strong>Gallega, John David B.</strong><br>Frontend Developer</div></div>
+            <div class="roster-item"><div class="avatar">MV</div><div><strong>Villamor, Marc Danielle</strong><br>Backend Developer</div></div>
+            <div class="roster-item"><div class="avatar">MK</div><div><strong>Areglado, Meric Kent N.</strong><br>UI/UX Designer</div></div>
+            <div class="roster-item"><div class="avatar">AL</div><div><strong>Lagas, Anroyd</strong><br>IT Specialist</div></div>
         </div>
     </div>
 
 </div>
-
 <script>
-    const profiles = {
-        gallega: {
-            name: "Gallega, John David B.",
-            age: 20,
-            role: "Frontend Developer",
-            skills: "HTML, CSS, JavaScript, React"
-        },
-        villamor: {
-            name: "Villamor, Marc Danielle",
-            age: 22,
-            role: "Backend Developer",
-            skills: "Node.js, PHP, MySQL"
-        },
-        areg: {
-            name: "Areglado, Meric Kent N.",
-            age: 21,
-            role: "UI/UX Designer",
-            skills: "Figma, Adobe XD, Wireframing"
-        },
-        lagas: {
-            name: "Lagas, Anroyd",
-            age: 20,
-            role: "IT Specialist",
-            skills: "Networking, Troubleshooting, System Admin"
+const profiles = {
+    gallega: {
+        initials: "JD",
+        name: "Gallega, John David B.",
+        role: "Frontend Developer",
+        email: "jd.gallega@company.com",
+        location: "Manila, Philippines",
+        summary: "Frontend Developer skilled in building responsive and modern web interfaces using HTML, CSS, JavaScript, and React.",
+        skills: {
+            "HTML/CSS": 90,
+            "JavaScript": 85,
+            "React": 80,
+            "UI Implementation": 88
         }
-    };
-
-    function showProfile(key) {
-        const p = profiles[key];
-        document.getElementById("content-box").innerHTML = `
-            <p><strong>Name:</strong> ${p.name}</p>
-            <p><strong>Age:</strong> ${p.age}</p>
-            <p><strong>Role:</strong> ${p.role}</p>
-            <p><strong>Skills:</strong> ${p.skills}</p>
-        `;
+    },
+    villamor: {
+        initials: "MV",
+        name: "Villamor, Marc Danielle",
+        role: "Backend Developer",
+        email: "marc.v@company.com",
+        location: "Makati, Philippines",
+        summary: "Backend Developer experienced in building APIs, managing databases, and optimizing server-side logic.",
+        skills: {
+            "Node.js": 85,
+            "PHP": 80,
+            "MySQL": 88,
+            "API Development": 90
+        }
+    },
+    areg: {
+        initials: "MK",
+        name: "Areglado, Meric Kent N.",
+        role: "UI/UX Designer",
+        email: "meric.k@company.com",
+        location: "Quezon City, Philippines",
+        summary: "UI/UX Designer focused on creating intuitive and visually engaging user experiences using Figma and Adobe XD.",
+        skills: {
+            "Figma": 92,
+            "Adobe XD": 85,
+            "Wireframing": 88,
+            "Prototyping": 90
+        }
+    },
+    lagas: {
+        initials: "AL",
+        name: "Lagas, Anroyd",
+        role: "IT Specialist",
+        email: "a.lagas@company.com",
+        location: "Cebu City, Philippines",
+        summary: "IT Specialist skilled in troubleshooting, networking, and systems administration.",
+        skills: {
+            "Networking": 88,
+            "Troubleshooting": 90,
+            "SysAdmin": 85,
+            "Security": 82
+        }
     }
-</script>
+};
 
+function showProfile(key) {
+    const p = profiles[key];
+    document.querySelector('.content').innerHTML = `
+        <div class='profile-header card'>
+            <div style="display:flex; align-items:center; gap:20px;">
+                <div class='avatar' style="width:70px; height:70px; font-size:26px;">${p.initials}</div>
+                <div>
+                    <h2>${p.name}</h2>
+                    <p style="color:#6366f1; font-weight:600;">${p.role}</p>
+                    <p>${p.email} • ${p.location}</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:20px; margin-top:20px;">
+            <div class="card" style="flex:2;">
+                <h3>Professional Summary</h3>
+                <p>${p.summary}</p>
+            </div>
+
+            <div class="card" style="flex:1;">
+                <h3>Skills</h3>
+                ${Object.entries(p.skills)
+                    .map(skill => `
+                        <p style="margin:8px 0 4px; font-weight:600;">${skill[0]} <span style='float:right;'>${skill[1]}%</span></p>
+                        <div style="width:100%; height:6px; background:#e2e8f0; border-radius:4px;">
+                            <div style="width:${skill[1]}%; height:100%; background:#6366f1; border-radius:4px;"></div>
+                        </div>
+                    `)
+                    .join('')}
+            </div>
+        </div>
+    `;
+}
+function showDashboard() {
+    document.querySelector('.content').innerHTML = `
+        <h2>Team Dashboard</h2>
+        <p>Overview of the team's performance and roster.</p>
+
+        <div class='stats-grid'>
+            <div class='stat-box'><div class='stat-number'>5</div><div>Team Members</div></div>
+            <div class='stat-box'><div class='stat-number'>27</div><div>Total Skills</div></div>
+            <div class='stat-box'><div class='stat-number'>80%</div><div>Avg. Proficiency</div></div>
+            <div class='stat-box'><div class='stat-number'>3</div><div>Active Projects</div></div>
+        </div>
+
+        <div class='active-roster'>
+            <h3>Active Roster</h3>
+            <div class='roster-item'><div class='avatar'>JD</div><div><strong>Gallega, John David B.</strong><br>Frontend Developer</div></div>
+            <div class='roster-item'><div class='avatar'>MV</div><div><strong>Villamor, Marc Danielle</strong><br>Backend Developer</div></div>
+            <div class='roster-item'><div class='avatar'>MK</div><div><strong>Areglado, Meric Kent N.</strong><br>UI/UX Designer</div></div>
+            <div class='roster-item'><div class='avatar'>AL</div><div><strong>Lagas, Anroyd</strong><br>IT Specialist</div></div>
+        </div>
+    `;
+}
+
+</script>
 </body>
 </html>
